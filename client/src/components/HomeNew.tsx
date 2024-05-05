@@ -7,6 +7,8 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import html2canvas from "html2canvas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import telechargerIcon from "/src/assets/telecharger.png";
+import copierIcon from "/src/assets/copie.png";
 import {
   formatISODurationToMinutesAndSeconds,
   getTimeAgo,
@@ -667,13 +669,13 @@ const HomeNew = () => {
             </div>
             <div className="flex justify-center mt-10">
               <CustomButton
-                pathIcon="/src/assets/telecharger.png"
+                pathIcon={telechargerIcon}
                 onClick={handleDownload}
                 label="Télécharger"
               />
               <div className="w-8"></div>
               <CustomButton
-                pathIcon="/src/assets/copie.png"
+                pathIcon={copierIcon}
                 onClick={handleCopyToClipboard}
                 label="Copier"
               />
