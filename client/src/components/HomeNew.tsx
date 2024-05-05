@@ -42,9 +42,14 @@ const HomeNew = () => {
   const typingTimeout = useRef(0);
 
   const handleChange = (value: string) => {
+    console.log(youtubeUrl);
     setYoutubeUrl(value);
-    const videoId: string = getVideoId(value);
-    fetchYouTubeVideo(videoId);
+    // const videoId: string = getVideoId(value);
+    // fetchYouTubeVideo(videoId);
+    const videoId: string | null = getVideoId(value);
+    if (videoId) {
+      fetchYouTubeVideo(videoId);
+    }
   };
 
   const transformImageUrl = (videoImage: string) => {
@@ -248,22 +253,31 @@ const HomeNew = () => {
     const settingsFromStorage = savedSettings ? JSON.parse(savedSettings) : {};
 
     const queryParams = new URLSearchParams(window.location.search);
-    const settingsFromURL = Object.keys(defaultSwitchesSlidersState).reduce(
-      (acc, key) => {
-        const value = queryParams.get(key);
-        if (value !== null) {
-          acc[key] = isNaN(value)
-            ? value === "true"
-              ? true
-              : value === "false"
-              ? false
-              : value
-            : Number(value);
-        }
-        return acc;
-      },
-      {}
-    );
+
+    type SettingsProps = {
+      [key: string]: boolean | number | string;
+    };
+
+    const settingsFromURL: SettingsProps = Object.keys(
+      defaultSwitchesSlidersState
+    ).reduce((acc: SettingsProps, key: string) => {
+      const value = queryParams.get(key);
+      if (value !== null) {
+        acc[key] = value === "true" ? true : value === "false" ? false : value;
+      }
+      return acc;
+
+      // if (value !== null) {
+      //   acc[key] = isNaN(value)
+      //     ? value === "true"
+      //       ? true
+      //       : value === "false"
+      //       ? false
+      //       : value
+      //     : Number(value);
+      // }
+      // return acc;
+    }, {});
 
     // Combine settings from URL and storage, fallback to default values
     return {
@@ -280,7 +294,7 @@ const HomeNew = () => {
     switchName: string,
     newValue: string | boolean | number
   ) => {
-    setSwitchesSlidersState((prevState) => {
+    setSwitchesSlidersState((prevState: typeof switchesSlidersState) => {
       const newState = { ...prevState, [switchName]: newValue };
       localStorage.setItem("userSettings", JSON.stringify(newState));
       const queryParams = new URLSearchParams(window.location.search);
@@ -322,7 +336,8 @@ const HomeNew = () => {
     const queryParams = new URLSearchParams();
     // Ajout de chaque état de switch comme paramètre
     Object.entries(switchesSlidersState).forEach(([key, value]) => {
-      queryParams.set(key, value.toString());
+      // queryParams.set(key, value.toString());
+      queryParams.set(key, (value ?? "").toString());
     });
     // Mise à jour de l'URL
     window.history.replaceState(null, "", `?${queryParams.toString()}`);
