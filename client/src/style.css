@@ -1,0 +1,52 @@
+@tailwind base;
+body {
+  /* padding: 5px; */
+  text-align: center;
+  /* background: black; */
+}
+@font-face {
+  font-family: "CalSans";
+  src: url("/src/assets/fonts/CalSans-SemiBold.woff2") format("woff2"),
+    url("/src/assets/fonts/CalSans-SemiBold.woff") format("woff");
+  font-style: normal;
+}
+
+.border-animation {
+  animation: borderSpin 3s linear infinite;
+  border-width: 2px;
+  border-style: solid;
+}
+input::placeholder {
+  transition: all 0.3s ease-in-out;
+}
+
+.loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  background: #fff;
+  box-shadow: -24px 0 #fff, 24px 0 #fff;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #fff;
+    box-shadow: -24px 0 #fb7185, 24px 0 #fff;
+  }
+  66% {
+    background: #fb7185;
+    box-shadow: -24px 0 #fff, 24px 0 #fff;
+  }
+  100% {
+    background: #fff;
+    box-shadow: -24px 0 #fff, 24px 0 #fb7185;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
