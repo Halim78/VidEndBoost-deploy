@@ -55,7 +55,7 @@ const HomeNew = () => {
   };
 
   const transformImageUrl = (videoImage: string) => {
-    const proxyUrl = `http://localhost:3001/image-proxy?url=${encodeURIComponent(
+    const proxyUrl = `https://vid-end-boost-deploy-server.vercel.app//image-proxy?url=${encodeURIComponent(
       videoImage
     )}`;
     return proxyUrl;
