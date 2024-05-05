@@ -1,4 +1,8 @@
 import { changeDarkMode } from "../Utils/ParsingData";
+import videoBoostLogo from "/src/assets/videndboost-logo.png";
+import moonIcon from "/src/assets/moon.png";
+import sunIcon from "/src/assets/sun.png";
+import linkedinIcon from "/src/assets/linkedin.png";
 
 const Header = () => {
   return (
@@ -6,7 +10,7 @@ const Header = () => {
       <div className="flex">
         <div className="w-8"></div>
         <img
-          src="/src/assets/videndboost-logo.png"
+          src={videoBoostLogo}
           alt="logo videndboost"
           className="w-20 h-20 p-3"
         />
@@ -29,7 +33,7 @@ const Header = () => {
       <div className="flex justify-between p-6">
         <div className="flex items-start pt-1 pr-8">
           <img
-            src="/src/assets/moon.png"
+            src={moonIcon}
             className="cursor-pointer display-none toggle-dark"
             onClick={changeDarkMode}
             height={25}
@@ -37,7 +41,7 @@ const Header = () => {
             alt="icon lune"
           />
           <img
-            src="/src/assets/sun.png"
+            src={sunIcon}
             className="cursor-pointer toggle-dark"
             onClick={changeDarkMode}
             height={25}
@@ -47,7 +51,7 @@ const Header = () => {
         </div>
         <a href="https://www.linkedin.com/in/halim-aktas/" target="_blank">
           <img
-            src="/src/assets/linkedin.png"
+            src={linkedinIcon}
             alt="logo linkedin"
             className="h-8 mr-2 cursor-pointer"
           />
