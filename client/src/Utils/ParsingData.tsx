@@ -44,16 +44,16 @@ export function formatLikeCount(views: number) {
   }
 }
 
-export function changeDarkMode() {
-  if (localStorage.theme === "dark" || !("theme" in localStorage)) {
+export function toggleTheme() {
+  const newTheme = localStorage.theme === "dark" ? "light" : "dark";
+  localStorage.theme = newTheme; // Sauvegarder le nouveau thème dans localStorage
+  initializeTheme(); // Appliquer le nouveau thème
+}
+
+export function initializeTheme() {
+  if (localStorage.theme === "dark") {
     document.documentElement.classList.add("dark");
   } else {
     document.documentElement.classList.remove("dark");
-  }
-
-  if (localStorage.theme === "dark") {
-    localStorage.theme = "light";
-  } else {
-    localStorage.theme = "dark";
   }
 }
