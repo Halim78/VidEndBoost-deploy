@@ -39,7 +39,7 @@ const HomeNew = () => {
 
   //POur le placeholder dynamique
   const [placeholder, setPlaceholder] = useState("");
-  const fullText = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+  const fullText = "htttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
   const charIndex = useRef(0);
   const typingTimeout = useRef(0);
 
