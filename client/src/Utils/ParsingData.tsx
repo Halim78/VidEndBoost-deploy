@@ -47,9 +47,10 @@ export function formatLikeCount(views: number) {
 export function changeDarkMode() {
   const theme = localStorage.getItem("theme");
   if (theme === "dark") {
-    document.documentElement.classList.remove("dark");
-  } else {
     document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
   }
 
   localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
