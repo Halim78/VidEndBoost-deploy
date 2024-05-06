@@ -516,6 +516,8 @@ const HomeNew = () => {
                         type={index === 0 ? "col" : "row"}
                         isSelected={
                           switchesSlidersState.modelSelectedIndex === index
+                            ? true
+                            : false
                         }
                         onSkeletonChange={() => {
                           handleNewSwitchChange(
