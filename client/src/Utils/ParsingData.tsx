@@ -49,7 +49,7 @@ export function changeDarkMode() {
   if (theme === "dark") {
     document.documentElement.classList.add("dark");
   } else {
-    document.documentElement.classList.remove("dark");
+    // document.documentElement.classList.remove("dark");
     document.documentElement.classList.add("light");
   }
 
