@@ -3,8 +3,13 @@ import videoBoostLogo from "/src/assets/videndboost-logo.png";
 import moonIcon from "/src/assets/moon.png";
 import sunIcon from "/src/assets/sun.png";
 import linkedinIcon from "/src/assets/linkedin.png";
+import { useEffect } from "react";
 
 const Header = () => {
+  useEffect(() => {
+    changeDarkMode();
+  }, []);
+
   return (
     <div className="flex flex-row justify-between h-16">
       <div className="flex">

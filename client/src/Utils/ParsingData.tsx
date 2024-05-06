@@ -45,15 +45,12 @@ export function formatLikeCount(views: number) {
 }
 
 export function changeDarkMode() {
-  if (localStorage.theme === "dark" || !("theme" in localStorage)) {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
     document.documentElement.classList.add("dark");
   } else {
     document.documentElement.classList.remove("dark");
   }
 
-  if (localStorage.theme === "dark") {
-    localStorage.theme = "light";
-  } else {
-    localStorage.theme = "dark";
-  }
+  localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
 }
