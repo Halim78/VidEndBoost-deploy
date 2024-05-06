@@ -1,23 +1,14 @@
+import { toggleTheme, initializeTheme } from "../Utils/ParsingData";
 import videoBoostLogo from "/src/assets/videndboost-logo.png";
 import moonIcon from "/src/assets/moon.png";
 import sunIcon from "/src/assets/sun.png";
 import linkedinIcon from "/src/assets/linkedin.png";
 import { useEffect } from "react";
-import { changeDarkMode, applyTheme, toggleTheme } from "../Utils/ParsingData";
 
 const Header = () => {
   useEffect(() => {
-    const themeFromUrl = new URLSearchParams(window.location.search).get(
-      "theme"
-    );
-    if (themeFromUrl) {
-      localStorage.setItem("theme", themeFromUrl);
-      applyTheme(themeFromUrl);
-    } else {
-      changeDarkMode();
-    }
+    initializeTheme(); // Applique le thème lors du montage du composant
   }, []);
-
   return (
     <div className="flex flex-row justify-between h-16">
       <div className="flex">
