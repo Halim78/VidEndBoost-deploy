@@ -362,7 +362,7 @@ const HomeNew = () => {
           </span>
         </h1>
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 max-md:mt-14">
         <div className="flex items-end max-md:flex-col">
           <label className="block pr-2 text-xl tracking-wider text-black dark:text-white ">
             Place ici l'URL de ta vidéo{" "}
@@ -378,7 +378,7 @@ const HomeNew = () => {
                 handleChange(e.target.value);
                 handleNewSwitchChange("youtubeVideoPath", e.target.value);
               }}
-              className="max-w-md px-3 py-1 text-base font-normal border-2 rounded-md w-96 focus:outline-none focus:border-purple-500"
+              className="max-w-md px-3 py-1 max-md:py-0 text-base font-normal border-2 rounded-md w-96 focus:outline-none focus:border-purple-500"
               placeholder={placeholder}
             />
             {isLoading && <LinearProgressBar />}
@@ -390,7 +390,7 @@ const HomeNew = () => {
         <div className="flex items-center justify-around w-1/2 pt-1 max-lg:w-auto max-md:flex-col ">
           <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
           <div>
-            <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black dark:text-white">
+            <h2 className="pb-4 text-3xl max-md:text-xl font-medium tracking-wider text-left text-black dark:text-white">
               Paramètres
             </h2>
             <div
@@ -467,7 +467,7 @@ const HomeNew = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-1/3 mt-16 max-sm:flex-row max-sm:justify-center">
+          <div className="flex flex-col w-1/3 max-md:w-2/3 mt-16 max-sm:flex-row max-sm:justify-center">
             <div>
               <Slider
                 value={switchesSlidersState.progressBar}
@@ -536,7 +536,7 @@ const HomeNew = () => {
         </div>
         {/*Bloc Droite */}
         <div
-          className="flex items-center justify-center w-1/2 border-pinkBorderCard border-y-2 dark:border-borderGrayOpac max-lg:w-auto max-lg:py-16"
+          className="flex items-center  justify-center w-1/2 border-pinkBorderCard border-y-2 dark:border-borderGrayOpac max-lg:w-auto max-md:py-8 max-lg:py-16"
           style={{
             borderTopWidth: "2px",
             borderBottomWidth: "2px",
@@ -686,7 +686,9 @@ const HomeNew = () => {
         </div>
       </div>
       <ToastContainer />
-      <span className="absolute text-gray-300 bottom-3 right-6">V.1</span>
+      <span className="absolute max-lg:hidden text-gray-300 bottom-3 right-6">
+        V.1
+      </span>
     </div>
   );
 };

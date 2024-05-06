@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <div className="flex flex-row justify-between h-16">
       <div className="flex">
-        <div className="w-8"></div>
+        <div className="w-8 max-md:w-0"></div>
         <img
           src={videoBoostLogo}
           alt="logo videndboost"

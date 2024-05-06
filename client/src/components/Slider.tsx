@@ -16,7 +16,7 @@ const Slider: React.FC<CustomSliderProps> = ({
   return (
     <div className="relative ">
       <div className="flex items-center justify-between py-1.5">
-        <div className="flex flex-col justify-between w-full">
+        <div className="flex flex-col max-md:flex-row justify-between w-full">
           <label
             htmlFor="default-range"
             className="w-full font-medium tracking-wider text-left text-black text-md dark:text-gray-300"
