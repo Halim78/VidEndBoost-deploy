@@ -1,4 +1,4 @@
-import { changeDarkMode } from "../Utils/ParsingData";
+import { toggleTheme, initializeTheme } from "../Utils/ParsingData";
 import videoBoostLogo from "/src/assets/videndboost-logo.png";
 import moonIcon from "/src/assets/moon.png";
 import sunIcon from "/src/assets/sun.png";
@@ -7,9 +7,8 @@ import { useEffect } from "react";
 
 const Header = () => {
   useEffect(() => {
-    changeDarkMode();
+    initializeTheme(); // Applique le thème lors du montage du composant
   }, []);
-
   return (
     <div className="flex flex-row justify-between h-16">
       <div className="flex">
@@ -40,7 +39,7 @@ const Header = () => {
           <img
             src={moonIcon}
             className="cursor-pointer display-none toggle-dark"
-            onClick={changeDarkMode}
+            onClick={toggleTheme}
             height={25}
             width={25}
             alt="icon lune"
@@ -48,7 +47,7 @@ const Header = () => {
           <img
             src={sunIcon}
             className="cursor-pointer toggle-dark"
-            onClick={changeDarkMode}
+            onClick={toggleTheme}
             height={25}
             width={25}
             alt="icon soleil"
