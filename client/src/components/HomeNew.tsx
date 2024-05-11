@@ -335,6 +335,16 @@ const HomeNew = () => {
     window.history.replaceState(null, "", `?${queryParams.toString()}`);
   }, [switchesSlidersState]);
 
+  const hiddenClass =
+    !switchesSlidersState.chaineLogo &&
+    !switchesSlidersState.chaineName &&
+    !switchesSlidersState.vues &&
+    !switchesSlidersState.like &&
+    !switchesSlidersState.publicationDate &&
+    switchesSlidersState.showTitle
+      ? "hidden"
+      : "";
+
   return (
     <div>
       <Header />
@@ -607,7 +617,8 @@ const HomeNew = () => {
                   </div>
                 )}
               </div>
-              <div className="w-full">
+
+              <div className={`w-full ${hiddenClass}`}>
                 <div className="flex items-start pt-2 pl-1.5">
                   {switchesSlidersState.chaineLogo && (
                     <img
@@ -617,20 +628,22 @@ const HomeNew = () => {
                     />
                   )}
                   <div className="flex flex-col max-w-sm pl-2">
-                    <span
-                      className={`font-bold pb-2 text-${
-                        switchesSlidersState.darkTheme === true
-                          ? "white"
-                          : "black"
-                      } font-roboto`}
-                      style={{
-                        fontSize: `${switchesSlidersState.policeSize}px`,
-                        textAlign: "left",
-                      }}
-                    >
-                      {!switchesSlidersState.showTitle &&
-                        switchesSlidersState.title}
-                    </span>
+                    {switchesSlidersState.showTitle ? null : (
+                      <span
+                        className={`font-bold pb-1 text-${
+                          switchesSlidersState.darkTheme === true
+                            ? "white"
+                            : "black"
+                        } font-roboto`}
+                        style={{
+                          fontSize: `${switchesSlidersState.policeSize}px`,
+                          textAlign: "left",
+                        }}
+                      >
+                        {!switchesSlidersState.showTitle &&
+                          switchesSlidersState.title}
+                      </span>
+                    )}
                     <div
                       className={`flex justify-${
                         switchesSlidersState.chaineName === false
