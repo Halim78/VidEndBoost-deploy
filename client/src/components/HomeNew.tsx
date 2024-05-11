@@ -22,6 +22,11 @@ import LinearProgressBar from "./LinearProgressBar";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const [placeholder, setPlaceholder] = useState("");
+  const fullText = "htttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
+  const charIndex = useRef(0);
+  const typingTimeout = useRef(0);
+
   const [isLoading, setIsLoading] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [isToastActive, setIsToastActive] = useState(false);
@@ -37,17 +42,14 @@ const HomeNew = () => {
     }
   };
 
-  //POur le placeholder dynamique
-  const [placeholder, setPlaceholder] = useState("");
-  const fullText = "htttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
-  const charIndex = useRef(0);
-  const typingTimeout = useRef(0);
-
   const handleChange = (value: string) => {
     console.log(youtubeUrl);
+    setPlaceholder(value);
     setYoutubeUrl(value);
-    // const videoId: string = getVideoId(value);
-    // fetchYouTubeVideo(videoId);
+    if (!value.startsWith("https://")) {
+      notify("⚠️ Adresse Invalide");
+      return null;
+    }
     const videoId: string | null = getVideoId(value);
     if (videoId) {
       fetchYouTubeVideo(videoId);
@@ -223,6 +225,29 @@ const HomeNew = () => {
     }, 800); // Délai pour le rechargement de l'image
   };
 
+  useEffect(() => {
+    const typeWriter = () => {
+      if (charIndex.current < fullText.length) {
+        setPlaceholder((prev) => prev + fullText[charIndex.current]);
+        charIndex.current++;
+      } else {
+        typingTimeout.current = setTimeout(() => {
+          setPlaceholder("");
+          charIndex.current = 0;
+        }, 1000); // Attendre 2 secondes avant de recommencer
+      }
+    };
+
+    const intervalId = setInterval(typeWriter, 250); // Vitesse de frappe
+
+    return () => {
+      clearInterval(intervalId);
+      if (typingTimeout.current) {
+        clearTimeout(typingTimeout.current);
+      }
+    };
+  }, []);
+
   //GESTION DU LOCALSTORAGE
   const defaultSwitchesSlidersState = {
     duration: false,
@@ -249,6 +274,7 @@ const HomeNew = () => {
     channelImage:
       "https://yt3.ggpht.com/ytc/AIdro_ladyg5fV6ymBjPWBVtxYT06g8wSVa4-wnvez7kd9T-Ums=s88-c-k-c0x00ffffff-no-rj",
     videoImage: "https://i.ytimg.com/vi/f7_CHu0ADhM/maxresdefault.jpg",
+    showTitle: true,
   };
   const loadSettings = () => {
     const savedSettings = localStorage.getItem("userSettings");
@@ -268,17 +294,6 @@ const HomeNew = () => {
         acc[key] = value === "true" ? true : value === "false" ? false : value;
       }
       return acc;
-
-      // if (value !== null) {
-      //   acc[key] = isNaN(value)
-      //     ? value === "true"
-      //       ? true
-      //       : value === "false"
-      //       ? false
-      //       : value
-      //     : Number(value);
-      // }
-      // return acc;
     }, {});
 
     // Combine settings from URL and storage, fallback to default values
@@ -311,39 +326,14 @@ const HomeNew = () => {
   }, [switchesSlidersState.youtubeVideoPath]);
 
   useEffect(() => {
-    const typeWriter = () => {
-      if (charIndex.current < fullText.length) {
-        setPlaceholder((prev) => prev + fullText[charIndex.current]);
-        charIndex.current++;
-      } else {
-        // Réinitialiser après une pause à la fin
-        typingTimeout.current = setTimeout(() => {
-          setPlaceholder("");
-          charIndex.current = 0;
-        }, 1000); // Attendre 2 secondes avant de recommencer
-      }
-    };
-
-    const intervalId = setInterval(typeWriter, 250); // Vitesse de frappe
-
-    return () => {
-      clearInterval(intervalId);
-      if (typingTimeout.current) {
-        clearTimeout(typingTimeout.current);
-      }
-    }; // Nettoyer les timeouts et intervalles lors du démontage
-  }, []);
-
-  useEffect(() => {
     const queryParams = new URLSearchParams();
     // Ajout de chaque état de switch comme paramètre
     Object.entries(switchesSlidersState).forEach(([key, value]) => {
-      // queryParams.set(key, value.toString());
       queryParams.set(key, (value ?? "").toString());
     });
     // Mise à jour de l'URL
     window.history.replaceState(null, "", `?${queryParams.toString()}`);
-  }, [switchesSlidersState]); // Déclencheur sur changement de switchesSlidersState
+  }, [switchesSlidersState]);
 
   return (
     <div>
@@ -372,13 +362,14 @@ const HomeNew = () => {
           </label>
           <div>
             <input
+              id="typing-input"
               type="text"
               value={switchesSlidersState.youtubeVideoPath}
               onChange={(e) => {
                 handleChange(e.target.value);
                 handleNewSwitchChange("youtubeVideoPath", e.target.value);
               }}
-              className="max-w-md px-3 py-1 max-md:py-0 text-base font-normal border-2 rounded-md w-96 focus:outline-none focus:border-purple-500"
+              className="max-w-md px-3 py-1 text-base font-normal border-2 rounded-md max-md:py-0 w-96 focus:outline-none focus:border-purple-500"
               placeholder={placeholder}
             />
             {isLoading && <LinearProgressBar />}
@@ -390,7 +381,7 @@ const HomeNew = () => {
         <div className="flex items-center justify-around w-1/2 pt-1 max-lg:w-auto max-md:flex-col ">
           <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
           <div>
-            <h2 className="pb-4 text-3xl max-md:text-xl font-medium tracking-wider text-left text-black dark:text-white">
+            <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
               Paramètres
             </h2>
             <div
@@ -458,6 +449,13 @@ const HomeNew = () => {
                   title="Afficher le nombre de Like"
                 />
                 <CustomSwitch
+                  isActive={switchesSlidersState.showTitle}
+                  onToggle={(newValue) =>
+                    handleNewSwitchChange("showTitle", newValue)
+                  }
+                  title="Afficher le titre sur l'image"
+                />
+                <CustomSwitch
                   isActive={switchesSlidersState.darkTheme}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("darkTheme", newValue)
@@ -467,7 +465,7 @@ const HomeNew = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-1/3 max-md:w-2/3 mt-16 max-sm:flex-row max-sm:justify-center">
+          <div className="flex flex-col w-1/3 mt-16 max-md:w-2/3 max-sm:flex-row max-sm:justify-center">
             <div>
               <Slider
                 value={switchesSlidersState.progressBar}
@@ -536,7 +534,7 @@ const HomeNew = () => {
         </div>
         {/*Bloc Droite */}
         <div
-          className="flex items-center  justify-center w-1/2 border-pinkBorderCard border-y-2 dark:border-borderGrayOpac max-lg:w-auto max-md:py-8 max-lg:py-16"
+          className="flex items-center justify-center w-1/2 border-pinkBorderCard border-y-2 dark:border-borderGrayOpac max-lg:w-auto max-md:py-8 max-lg:py-16"
           style={{
             borderTopWidth: "2px",
             borderBottomWidth: "2px",
@@ -582,6 +580,17 @@ const HomeNew = () => {
                   src={switchesSlidersState.videoImage}
                   alt="Image de la vidéo YouTube"
                 />
+                {switchesSlidersState.showTitle && (
+                  <div
+                    className="absolute top-0 left-0 w-full p-2 tracking-wider text-white bg-black bg-opacity-50 gradient-bg"
+                    style={{
+                      fontSize: `${switchesSlidersState.policeSize}px`,
+                      textAlign: "center",
+                    }}
+                  >
+                    {switchesSlidersState.title}
+                  </div>
+                )}
                 {/* Conteneur de la barre de progression avec arrondis en bas */}
                 {switchesSlidersState.lectureBar && (
                   <div className="absolute bottom-0 left-0 w-full h-1 overflow-hidden bg-gray-300 rounded-b-xl">
@@ -619,7 +628,8 @@ const HomeNew = () => {
                         textAlign: "left",
                       }}
                     >
-                      {switchesSlidersState.title}
+                      {!switchesSlidersState.showTitle &&
+                        switchesSlidersState.title}
                     </span>
                     <div
                       className={`flex justify-${
@@ -686,7 +696,7 @@ const HomeNew = () => {
         </div>
       </div>
       <ToastContainer />
-      <span className="absolute max-lg:hidden text-gray-300 bottom-3 right-6">
+      <span className="absolute text-gray-300 max-lg:hidden bottom-3 right-6">
         V.1
       </span>
     </div>
