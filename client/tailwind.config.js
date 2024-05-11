@@ -12,9 +12,11 @@ export default {
         pinkBorderCard: "rgb(252 231 243 / 62%)",
         borderLightGrayOpacity: "rgb(196 192 194 / 12%)",
         yellowArrow: "#fc6",
+        subTitleGray: "#AAAAAA",
       },
       fontFamily: {
-        sans: ["CalSans", "sans-serif"],
+        sans: ["Calsans", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
     },
   },

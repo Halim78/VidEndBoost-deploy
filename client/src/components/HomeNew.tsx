@@ -234,7 +234,7 @@ const HomeNew = () => {
         typingTimeout.current = setTimeout(() => {
           setPlaceholder("");
           charIndex.current = 0;
-        }, 1000); // Attendre 2 secondes avant de recommencer
+        }, 1000000); // Attendre 2 secondes avant de recommencer
       }
     };
 
@@ -564,7 +564,10 @@ const HomeNew = () => {
                shadow-lg h-1/2`}
               style={{
                 padding: `${switchesSlidersState.spacement}px`,
-                borderRadius: `${switchesSlidersState.borderRadius}px`,
+                borderRadius: `${
+                  parseInt(switchesSlidersState.borderRadius) +
+                  parseInt(switchesSlidersState.spacement)
+                }px`,
                 backgroundColor: `${
                   switchesSlidersState.darkTheme === true ? "black" : "white"
                 }`,
@@ -592,7 +595,7 @@ const HomeNew = () => {
                 />
                 {switchesSlidersState.showTitle && (
                   <div
-                    className="absolute top-0 left-0 w-full p-2 tracking-wider text-white bg-black bg-opacity-50 gradient-bg"
+                    className="absolute top-0 left-0 w-full p-2 font-bold tracking-wider text-white bg-black bg-opacity-50 gradient-bg font-roboto"
                     style={{
                       fontSize: `${switchesSlidersState.policeSize}px`,
                       textAlign: "center",
@@ -630,11 +633,11 @@ const HomeNew = () => {
                   <div className="flex flex-col max-w-sm pl-2">
                     {switchesSlidersState.showTitle ? null : (
                       <span
-                        className={`font-bold pb-1 text-${
+                        className={`pb-1 font-roboto font-bold text-${
                           switchesSlidersState.darkTheme === true
                             ? "white"
                             : "black"
-                        } font-roboto`}
+                        }`}
                         style={{
                           fontSize: `${switchesSlidersState.policeSize}px`,
                           textAlign: "left",
@@ -652,7 +655,7 @@ const HomeNew = () => {
                       }`}
                     >
                       {switchesSlidersState.chaineName && (
-                        <span className="mt-1 text-sm font-medium text-gray-400 font-roboto ">
+                        <span className="mt-1 text-sm font-medium text-subTitleGray font-roboto ">
                           {switchesSlidersState.channelTitle}
                         </span>
                       )}
@@ -669,20 +672,20 @@ const HomeNew = () => {
                     </div>
                     <div className="flex ">
                       {switchesSlidersState.vues && (
-                        <span className="text-xs font-medium text-gray-400 font-roboto ">
+                        <span className="text-sm font-medium text-subTitleGray font-roboto ">
                           {switchesSlidersState.viewCount}
                         </span>
                       )}
                       {switchesSlidersState.publicationDate &&
                         switchesSlidersState.vues && (
-                          <span className="px-1 text-xs font-medium text-gray-400 font-roboto">
+                          <span className="px-1 text-sm font-medium text-subTitleGray font-roboto">
                             {" "}
                             .{" "}
                           </span>
                         )}
                       {switchesSlidersState.publicationDate && (
                         <>
-                          <span className="text-xs font-medium text-gray-400 font-roboto ">
+                          <span className="text-sm font-medium text-subTitleGray font-roboto ">
                             {switchesSlidersState.publicationVideoDate}
                           </span>
                         </>

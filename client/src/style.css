@@ -1,8 +1,6 @@
 @tailwind base;
 body {
-  /* padding: 5px; */
   text-align: center;
-  /* background: black; */
 }
 @font-face {
   font-family: "CalSans";
