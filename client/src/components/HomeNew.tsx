@@ -660,7 +660,12 @@ const HomeNew = () => {
                         </span>
                       )}
                       {switchesSlidersState.like && (
-                        <div className="absolute flex right-5p bottom-6p max-w-sm:right-4p max-w-sm:bottom-36p">
+                        //right-3p bottom-36P
+                        <div
+                          className={`absolute flex right-5p bottom-${
+                            switchesSlidersState.type === "row" ? "36p" : "6p"
+                          } max-w-sm:right-4p max-w-sm:bottom-36p`}
+                        >
                           <button className="flex items-center px-3 py-1 text-white bg-gray-500 rounded-full pointer-events-none w-17 h-9">
                             <ThumbUpOffAltIcon sx={{ fontSize: 20 }} />
                             <span className="p-0 ml-2 text-xs font-bold">
