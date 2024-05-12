@@ -560,7 +560,7 @@ const HomeNew = () => {
             <div className="h-16"></div>
             <div
               ref={divRef}
-              className={`flex flex-${switchesSlidersState.modelSelectedDisplay} items-start justify-center mx-8 overflow-hidden bg-transparent
+              className={`flex relative flex-${switchesSlidersState.modelSelectedDisplay} items-start justify-center mx-8 overflow-hidden bg-transparent
                shadow-lg h-1/2`}
               style={{
                 padding: `${switchesSlidersState.spacement}px`,
@@ -660,7 +660,7 @@ const HomeNew = () => {
                         </span>
                       )}
                       {switchesSlidersState.like && (
-                        <div className="flex">
+                        <div className="absolute flex right-5p bottom-6p max-w-sm:right-4p max-w-sm:bottom-36p">
                           <button className="flex items-center px-3 py-1 text-white bg-gray-500 rounded-full pointer-events-none w-17 h-9">
                             <ThumbUpOffAltIcon sx={{ fontSize: 20 }} />
                             <span className="p-0 ml-2 text-xs font-bold">

@@ -7,6 +7,12 @@ export default {
       borderWidth: {
         20: "20px",
       },
+      spacing: {
+        "5p": "5%",
+        "4p": "4%",
+        "6p": "6%",
+        "36p": "36%",
+      },
       colors: {
         borderGrayOpac: "rgb(196 192 194 / 12%)",
         pinkBorderCard: "rgb(252 231 243 / 62%)",
