@@ -21,7 +21,14 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomSkeleton from "./CustomSkeleton";
 import LinearProgressBar from "./LinearProgressBar";
 
+const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+
 const HomeNew = () => {
+  useEffect(() => {
+    ReactGA.initialize(GOOGLE_ANALYTICS_ID);
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
+
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const [placeholder, setPlaceholder] = useState("");
   const fullText = "htttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
