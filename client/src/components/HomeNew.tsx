@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import ReactGA from "react-ga";
 import CustomSwitch from "./CustomSwitch";
 import Header from "./Header";
 import Slider from "./Slider";
@@ -21,14 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomSkeleton from "./CustomSkeleton";
 import LinearProgressBar from "./LinearProgressBar";
 
-const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
-
 const HomeNew = () => {
-  useEffect(() => {
-    ReactGA.initialize(GOOGLE_ANALYTICS_ID);
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-  }, []);
-
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const [placeholder, setPlaceholder] = useState("");
   const fullText = "htttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
@@ -153,10 +145,6 @@ const HomeNew = () => {
 
   //Télécharger la card
   const handleDownload = () => {
-    ReactGA.event({
-      category: "Button",
-      action: "Download Click",
-    });
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
       return;
@@ -194,10 +182,6 @@ const HomeNew = () => {
 
   //Copier la card dans le press papier
   const handleCopyToClipboard = () => {
-    ReactGA.event({
-      category: "Button",
-      action: "Copy Click",
-    });
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
       return;
