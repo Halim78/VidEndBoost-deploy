@@ -2,7 +2,9 @@ import HomeNew from "./components/HomeNew";
 import { Analytics } from "@vercel/analytics/react";
 import ReactGA from "react-ga";
 
-ReactGA.initialize("YOUR_GOOGLE_ANALYTICS_TRACKING_ID");
+const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+
+ReactGA.initialize(GOOGLE_ANALYTICS_ID);
 
 function App() {
   return (
