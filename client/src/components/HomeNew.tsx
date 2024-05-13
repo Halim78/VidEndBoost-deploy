@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ReactGA from "react-ga";
 import CustomSwitch from "./CustomSwitch";
 import Header from "./Header";
 import Slider from "./Slider";
@@ -145,6 +146,10 @@ const HomeNew = () => {
 
   //Télécharger la card
   const handleDownload = () => {
+    ReactGA.event({
+      category: "Button",
+      action: "Download Click",
+    });
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
       return;
@@ -182,6 +187,10 @@ const HomeNew = () => {
 
   //Copier la card dans le press papier
   const handleCopyToClipboard = () => {
+    ReactGA.event({
+      category: "Button",
+      action: "Copy Click",
+    });
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
       return;
