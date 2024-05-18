@@ -1,0 +1,23 @@
+{
+  "title": "Crée ta vignette Gratuitement",
+  "input-label": "Place ici l'URL de ta vidéo",
+  "title-union-word": "avec",
+  "VidEndBoost": "VidEndBoost",
+  "parameters-title": "Paramètres",
+  "download-card": "Télécharger",
+  "copy-card": "copier",
+  "model-choose": "Choisi ton modèle",
+  "display-video-time": "Afficher la durée de la vidéo",
+  "display-read-bar": "Afficher la lecture bar",
+  "display-logo": "Afficher le logo de la chaîne",
+  "display-channel": "Afficher le nom de la chaîne",
+  "display-vues": "Afficher les vues",
+  "display-publication": "Afficher la date de publication",
+  "display-likes": "Afficher le nombre de Like",
+  "display-image": "Afficher le titre sur l'image",
+  "display-theme": "Changer de thème",
+  "read-bar": "Progression lecture bar",
+  "border-radius": "Bord arrondis",
+  "spacing": "Espacements",
+  "title-size": "Taille du titre"
+}

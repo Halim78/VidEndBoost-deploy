@@ -4,6 +4,7 @@ import moonIcon from "/src/assets/moon.png";
 import sunIcon from "/src/assets/sun.png";
 import linkedinIcon from "/src/assets/linkedin.png";
 import { useEffect } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   useEffect(() => {
@@ -34,6 +35,8 @@ const Header = () => {
           <span className="loader max-md:h-2 max-md:w-2"></span>
         </h2>
       </div>
+      <LanguageSwitcher />
+
       <div className="flex justify-between p-6">
         <div className="flex items-start pt-1 pr-8">
           <img
@@ -53,13 +56,19 @@ const Header = () => {
             alt="icon soleil"
           />
         </div>
-        <a href="https://www.linkedin.com/in/halim-aktas/" target="_blank">
-          <img
-            src={linkedinIcon}
-            alt="logo linkedin"
-            className="h-8 mr-2 cursor-pointer"
-          />
-        </a>
+        <div className="flex flex-col items-end justify-between">
+          <a
+            href="https://www.linkedin.com/in/halim-aktas/"
+            target="_blank"
+            className="mb-2"
+          >
+            <img
+              src={linkedinIcon}
+              alt="logo linkedin"
+              className="h-8 mr-2 cursor-pointer"
+            />
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import CustomSkeleton from "./CustomSkeleton";
 import LinearProgressBar from "./LinearProgressBar";
+import { useTranslation } from "react-i18next";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -344,18 +345,17 @@ const HomeNew = () => {
     switchesSlidersState.showTitle
       ? "hidden"
       : "";
+  const { t } = useTranslation();
 
   return (
     <div>
       <Header />
       <div className="mt-0 mb-2 max-lg:mt-10 ">
         <h1 className="text-5xl leading-normal tracking-wider text-white max-md:mt-16 max-md:text-3xl ">
-          <span className="text-black dark:text-white">
-            Crée ta vignette Gratuitement
-          </span>
+          <span className="text-black dark:text-white">{t("title")}</span>
           <br />
           <span className="text-black dark:text-white">
-            avec{" "}
+            {t("title-union-word")}
             <span className="p-4 text-5xl font-bold text-center text-transparent max-md:text-4xl from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text">
               VidEndBoost
             </span>
@@ -365,7 +365,7 @@ const HomeNew = () => {
       <div className="flex justify-center mt-10 max-md:mt-14">
         <div className="flex items-end max-md:flex-col">
           <label className="block pr-2 text-xl tracking-wider text-black dark:text-white ">
-            Place ici l'URL de ta vidéo{" "}
+            {t("input-label")}
             <span className="text-2xl font-bold text-red-500 opacity-90">
               YouTube
             </span>
@@ -392,7 +392,7 @@ const HomeNew = () => {
           <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
           <div>
             <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
-              Paramètres
+              {t("parameters-title")}
             </h2>
             <div
               className="w-full fading-line"
@@ -414,63 +414,63 @@ const HomeNew = () => {
                   onToggle={(newValue) =>
                     handleNewSwitchChange("duration", newValue)
                   }
-                  title="Afficher la durée de la vidéo"
+                  title={t("display-video-time")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.lectureBar}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("lectureBar", newValue)
                   }
-                  title="Afficher la lecture bar"
+                  title={t("display-read-bar")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.chaineLogo}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("chaineLogo", newValue)
                   }
-                  title="Afficher le logo de la chaîne"
+                  title={t("display-logo")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.chaineName}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("chaineName", newValue)
                   }
-                  title="Afficher le nom de la chaîne"
+                  title={t("display-channel")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.vues}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("vues", newValue)
                   }
-                  title="Afficher les vues"
+                  title={t("display-vues")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.publicationDate}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("publicationDate", newValue)
                   }
-                  title="Afficher la date de publication"
+                  title={t("display-publication")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.like}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("like", newValue)
                   }
-                  title="Afficher le nombre de Like"
+                  title={t("display-likes")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.showTitle}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("showTitle", newValue)
                   }
-                  title="Afficher le titre sur l'image"
+                  title={t("display-image")}
                 />
                 <CustomSwitch
                   isActive={switchesSlidersState.darkTheme}
                   onToggle={(newValue) =>
                     handleNewSwitchChange("darkTheme", newValue)
                   }
-                  title="Changer de thème"
+                  title={t("display-theme")}
                 />
               </div>
             </div>
@@ -484,7 +484,7 @@ const HomeNew = () => {
                 onChange={(newValue) =>
                   handleNewSwitchChange("progressBar", newValue)
                 }
-                label="Progression lecture bar"
+                label={t("read-bar")}
               />
               <Slider
                 value={switchesSlidersState.borderRadius}
@@ -493,7 +493,7 @@ const HomeNew = () => {
                 onChange={(newValue) =>
                   handleNewSwitchChange("borderRadius", newValue)
                 }
-                label="Bord arrondis"
+                label={t("border-radius")}
               />
               <Slider
                 value={switchesSlidersState.spacement}
@@ -502,7 +502,7 @@ const HomeNew = () => {
                 onChange={(newValue) =>
                   handleNewSwitchChange("spacement", newValue)
                 }
-                label="Espacements"
+                label={t("spacing")}
               />
               <Slider
                 value={switchesSlidersState.policeSize}
@@ -510,12 +510,12 @@ const HomeNew = () => {
                 onChange={(newValue) =>
                   handleNewSwitchChange("policeSize", newValue)
                 }
-                label="Taille du titre"
+                label={t("title-size")}
               />
               <div className="flex-col items-center justify-center w-full m-8 mx-auto">
                 <div className="flex flex-col items-start justify-center">
                   <span className="pb-2 pr-2 tracking-wider text-black dark:text-white text-start text-md font-semi-bold">
-                    Choisis ton modèle
+                    {t("model-choose")}
                   </span>
                   <div className="flex items-center">
                     {[0, 1].map((index) => (
@@ -704,13 +704,13 @@ const HomeNew = () => {
               <CustomButton
                 pathIcon={telechargerIcon}
                 onClick={handleDownload}
-                label="Télécharger"
+                label={t("download-card")}
               />
               <div className="w-8"></div>
               <CustomButton
                 pathIcon={copierIcon}
                 onClick={handleCopyToClipboard}
-                label="Copier"
+                label={t("copy-card")}
               />
             </div>
           </div>

@@ -1,0 +1,23 @@
+{
+  "title": "Create your free sticker",
+  "input-label": "Place the URL of your video here",
+  "title-union-word": "with",
+  "VidEndBoost": "VidEndBoost",
+  "parameters-title": "Parameters",
+  "download-card": "Download",
+  "copy-card": "Copy",
+  "model-choose": "Choose your model",
+  "display-video-time": "Show video duration",
+  "display-read-bar": "Show bar playback",
+  "display-logo": "Show channel logo",
+  "display-channel": "Show channel name",
+  "display-vues": "Show views",
+  "display-publication": "Show publication date",
+  "display-likes": "Show number of likes",
+  "display-image": "Show title on image",
+  "display-theme": "Change theme",
+  "read-bar": "Progression bar reading",
+  "border-radius": "Rounded edges",
+  "spacing": "Spacing",
+  "title-size": "Title size"
+}
