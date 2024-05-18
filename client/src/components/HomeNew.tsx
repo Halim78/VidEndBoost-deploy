@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomSkeleton from "./CustomSkeleton";
 import LinearProgressBar from "./LinearProgressBar";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -391,9 +392,14 @@ const HomeNew = () => {
         <div className="flex items-center justify-around w-1/2 pt-1 max-lg:w-auto max-md:flex-col ">
           <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
           <div>
-            <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
-              {t("parameters-title")}
-            </h2>
+            <div className="flex justify-between">
+              <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
+                {t("parameters-title")}
+              </h2>
+              <div className="block sm:hidden">
+                <LanguageSwitcher />
+              </div>
+            </div>
             <div
               className="w-full fading-line"
               style={{

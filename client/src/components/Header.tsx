@@ -35,7 +35,9 @@ const Header = () => {
           <span className="loader max-md:h-2 max-md:w-2"></span>
         </h2>
       </div>
-      <LanguageSwitcher />
+      <div className="hidden sm:contents">
+        <LanguageSwitcher />
+      </div>
 
       <div className="flex justify-between p-6">
         <div className="flex items-start pt-1 pr-8">
