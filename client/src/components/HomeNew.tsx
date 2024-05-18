@@ -364,8 +364,8 @@ const HomeNew = () => {
         </h1>
       </div>
       <div className="flex justify-center mt-10 max-md:mt-14">
-        <div className="flex items-end max-md:flex-col">
-          <label className="block pr-2 text-xl tracking-wider text-black dark:text-white ">
+        <div className="flex items-end max-sm:items-center max-md:flex-col">
+          <label className="block pr-2 text-xl tracking-wider text-black max-sm:pr-0 dark:text-white ">
             {t("input-label")}
             <span className="text-2xl font-bold text-red-500 opacity-90">
               YouTube

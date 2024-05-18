@@ -43,18 +43,18 @@ const Header = () => {
         <div className="flex items-start pt-1 pr-8">
           <img
             src={moonIcon}
-            className="cursor-pointer display-none toggle-dark"
+            className="cursor-pointer toggle-dark"
             onClick={toggleTheme}
-            height={25}
-            width={25}
+            height={20}
+            width={20}
             alt="icon lune"
           />
           <img
             src={sunIcon}
-            className="cursor-pointer toggle-dark"
+            className="cursor-pointer display-none toggle-dark"
             onClick={toggleTheme}
-            height={25}
-            width={25}
+            height={20}
+            width={20}
             alt="icon soleil"
           />
         </div>
