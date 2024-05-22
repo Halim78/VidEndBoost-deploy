@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const LanguageSwitcher = () => {
@@ -13,10 +13,6 @@ const LanguageSwitcher = () => {
       return newChecked;
     });
   };
-
-  useEffect(() => {
-    setIsChecked(language === "fr");
-  }, [language]);
 
   return (
     <>

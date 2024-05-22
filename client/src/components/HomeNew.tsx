@@ -356,6 +356,10 @@ const HomeNew = () => {
           <span className="text-black dark:text-white">{t("title")}</span>
           <br />
           <span className="text-black dark:text-white">
+            {t("title-second-ligne")}
+          </span>
+          <br />
+          <span className="text-black dark:text-white">
             {t("title-union-word")}
             <span className="p-4 text-5xl font-bold text-center text-transparent max-md:text-4xl from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text">
               VidEndBoost
