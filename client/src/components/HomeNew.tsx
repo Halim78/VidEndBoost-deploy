@@ -21,6 +21,8 @@ import CustomSkeleton from "./CustomSkeleton";
 import LinearProgressBar from "./LinearProgressBar";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import AccordionParameters from "./AccordionParameters";
+import UploadImage from "./UploadImage";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -417,136 +419,142 @@ const HomeNew = () => {
             ></div>
             <br />
             <br />
-            <div className="flex w-auto">
-              <div>
-                <CustomSwitch
-                  isActive={switchesSlidersState.duration}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("duration", newValue)
-                  }
-                  title={t("display-video-time")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.lectureBar}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("lectureBar", newValue)
-                  }
-                  title={t("display-read-bar")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.chaineLogo}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("chaineLogo", newValue)
-                  }
-                  title={t("display-logo")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.chaineName}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("chaineName", newValue)
-                  }
-                  title={t("display-channel")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.vues}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("vues", newValue)
-                  }
-                  title={t("display-vues")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.publicationDate}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("publicationDate", newValue)
-                  }
-                  title={t("display-publication")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.like}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("like", newValue)
-                  }
-                  title={t("display-likes")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.showTitle}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("showTitle", newValue)
-                  }
-                  title={t("display-image")}
-                />
-                <CustomSwitch
-                  isActive={switchesSlidersState.darkTheme}
-                  onToggle={(newValue) =>
-                    handleNewSwitchChange("darkTheme", newValue)
-                  }
-                  title={t("display-theme")}
-                />
-              </div>
+            <div className="flex flex-col w-auto gap-6">
+              <AccordionParameters title="Affichage">
+                <div>
+                  <CustomSwitch
+                    isActive={switchesSlidersState.duration}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("duration", newValue)
+                    }
+                    title={t("display-video-time")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.lectureBar}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("lectureBar", newValue)
+                    }
+                    title={t("display-read-bar")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.chaineLogo}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("chaineLogo", newValue)
+                    }
+                    title={t("display-logo")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.chaineName}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("chaineName", newValue)
+                    }
+                    title={t("display-channel")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.vues}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("vues", newValue)
+                    }
+                    title={t("display-vues")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.publicationDate}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("publicationDate", newValue)
+                    }
+                    title={t("display-publication")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.like}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("like", newValue)
+                    }
+                    title={t("display-likes")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.showTitle}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("showTitle", newValue)
+                    }
+                    title={t("display-image")}
+                  />
+                  <CustomSwitch
+                    isActive={switchesSlidersState.darkTheme}
+                    onToggle={(newValue) =>
+                      handleNewSwitchChange("darkTheme", newValue)
+                    }
+                    title={t("display-theme")}
+                  />
+                </div>
+              </AccordionParameters>
+              <AccordionParameters title="Design">
+                <div>
+                  <Slider
+                    value={switchesSlidersState.progressBar}
+                    max={switchesSlidersState.durationVideo}
+                    min="0"
+                    onChange={(newValue) =>
+                      handleNewSwitchChange("progressBar", newValue)
+                    }
+                    label={t("read-bar")}
+                  />
+                  <Slider
+                    value={switchesSlidersState.borderRadius}
+                    max={"100"}
+                    min="0"
+                    onChange={(newValue) =>
+                      handleNewSwitchChange("borderRadius", newValue)
+                    }
+                    label={t("border-radius")}
+                  />
+                  <Slider
+                    value={switchesSlidersState.spacement}
+                    max={"70"}
+                    min="0"
+                    onChange={(newValue) =>
+                      handleNewSwitchChange("spacement", newValue)
+                    }
+                    label={t("spacing")}
+                  />
+                  <Slider
+                    value={switchesSlidersState.policeSize}
+                    max={"30"}
+                    onChange={(newValue) =>
+                      handleNewSwitchChange("policeSize", newValue)
+                    }
+                    label={t("title-size")}
+                  />
+                </div>
+              </AccordionParameters>
+              <UploadImage />
             </div>
           </div>
           <div className="flex flex-col w-1/3 mt-16 max-md:w-2/3 max-sm:flex-row max-sm:justify-center">
-            <div>
-              <Slider
-                value={switchesSlidersState.progressBar}
-                max={switchesSlidersState.durationVideo}
-                min="0"
-                onChange={(newValue) =>
-                  handleNewSwitchChange("progressBar", newValue)
-                }
-                label={t("read-bar")}
-              />
-              <Slider
-                value={switchesSlidersState.borderRadius}
-                max={"100"}
-                min="0"
-                onChange={(newValue) =>
-                  handleNewSwitchChange("borderRadius", newValue)
-                }
-                label={t("border-radius")}
-              />
-              <Slider
-                value={switchesSlidersState.spacement}
-                max={"70"}
-                min="0"
-                onChange={(newValue) =>
-                  handleNewSwitchChange("spacement", newValue)
-                }
-                label={t("spacing")}
-              />
-              <Slider
-                value={switchesSlidersState.policeSize}
-                max={"30"}
-                onChange={(newValue) =>
-                  handleNewSwitchChange("policeSize", newValue)
-                }
-                label={t("title-size")}
-              />
-              <div className="flex-col items-center justify-center w-full m-8 mx-auto">
-                <div className="flex flex-col items-start justify-center">
-                  <span className="pb-2 pr-2 tracking-wider text-black dark:text-white text-start text-md font-semi-bold">
-                    {t("model-choose")}
-                  </span>
-                  <div className="flex items-center">
-                    {[0, 1].map((index) => (
-                      <CustomSkeleton
-                        key={index}
-                        type={index === 0 ? "col" : "row"}
-                        isSelected={
-                          switchesSlidersState.modelSelectedIndex === index
-                            ? true
-                            : false
-                        }
-                        onSkeletonChange={() => {
-                          handleNewSwitchChange(
-                            "modelSelectedDisplay",
-                            index === 0 ? "col" : "row"
-                          );
-                          handleNewSwitchChange("modelSelectedIndex", index);
-                        }}
-                      />
-                    ))}
-                  </div>
+            {/* <UploadImage /> */}
+            <div className="flex-col items-center justify-center w-full m-8 mx-auto">
+              <div className="flex flex-col items-start justify-center">
+                <span className="pb-2 pr-2 tracking-wider text-black dark:text-white text-start text-md font-semi-bold">
+                  {t("model-choose")}
+                </span>
+                <div className="flex items-center">
+                  {[0, 1].map((index) => (
+                    <CustomSkeleton
+                      key={index}
+                      type={index === 0 ? "col" : "row"}
+                      isSelected={
+                        switchesSlidersState.modelSelectedIndex === index
+                          ? true
+                          : false
+                      }
+                      onSkeletonChange={() => {
+                        handleNewSwitchChange(
+                          "modelSelectedDisplay",
+                          index === 0 ? "col" : "row"
+                        );
+                        handleNewSwitchChange("modelSelectedIndex", index);
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
