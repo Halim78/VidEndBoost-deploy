@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import AccordionParameters from "./AccordionParameters";
 import UploadImage from "./UploadImage";
+import useStore from "../store";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -34,6 +35,8 @@ const HomeNew = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [isToastActive, setIsToastActive] = useState(false);
+
+  const { imagePath, setImagePath } = useStore();
 
   //Toast notification
   const notify = (label: string) => {
@@ -327,7 +330,8 @@ const HomeNew = () => {
 
   useEffect(() => {
     setYoutubeUrl(switchesSlidersState.youtubeVideoPath);
-  }, [switchesSlidersState.youtubeVideoPath]);
+    setImagePath(switchesSlidersState.youtubeVideoPath);
+  }, [switchesSlidersState.youtubeVideoPath, setImagePath]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams();
@@ -420,7 +424,7 @@ const HomeNew = () => {
             <br />
             <br />
             <div className="flex flex-col w-auto gap-6">
-              <AccordionParameters title="Affichage">
+              <AccordionParameters title={t("display-settings")}>
                 <div>
                   <CustomSwitch
                     isActive={switchesSlidersState.duration}
@@ -487,7 +491,7 @@ const HomeNew = () => {
                   />
                 </div>
               </AccordionParameters>
-              <AccordionParameters title="Design">
+              <AccordionParameters title={t("design-settings")}>
                 <div>
                   <Slider
                     value={switchesSlidersState.progressBar}
@@ -530,7 +534,6 @@ const HomeNew = () => {
             </div>
           </div>
           <div className="flex flex-col w-1/3 mt-16 max-md:w-2/3 max-sm:flex-row max-sm:justify-center">
-            {/* <UploadImage /> */}
             <div className="flex-col items-center justify-center w-full m-8 mx-auto">
               <div className="flex flex-col items-start justify-center">
                 <span className="pb-2 pr-2 tracking-wider text-black dark:text-white text-start text-md font-semi-bold">
@@ -608,6 +611,11 @@ const HomeNew = () => {
                   style={{
                     borderRadius: `${switchesSlidersState.borderRadius}px`,
                   }}
+                  // src={
+                  //   imagePath !== ""
+                  //     ? imagePath.toString
+                  //     : switchesSlidersState.videoImage
+                  // }
                   src={switchesSlidersState.videoImage}
                   alt="Image de la vidéo YouTube"
                 />

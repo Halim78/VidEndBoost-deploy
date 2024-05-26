@@ -20,5 +20,8 @@
   "read-bar": "Progression bar reading",
   "border-radius": "Rounded edges",
   "spacing": "Spacing",
-  "title-size": "Title size"
+  "title-size": "Title size",
+  "display-settings": "Display",
+  "design-settings": "Design",
+  "upload-image": "Upload an image for your thumbnail"
 }

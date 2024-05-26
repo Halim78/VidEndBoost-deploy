@@ -10,7 +10,7 @@ type AccordionProps = {
 
 const AccordionParameters: React.FC<AccordionProps> = ({ title, children }) => {
   return (
-    <div style={{ borderRadius: "5px", boxShadow: "0 0 3px 0px blue" }}>
+    <div style={{ boxShadow: "#e2dcdc 0px 0px 20px 0px", borderRadius: "5px" }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

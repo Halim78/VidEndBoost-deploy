@@ -20,5 +20,8 @@
   "read-bar": "Progression lecture bar",
   "border-radius": "Bord arrondis",
   "spacing": "Espacements",
-  "title-size": "Taille du titre"
+  "title-size": "Taille du titre",
+  "display-settings": "Affichage",
+  "design-settings": "Design",
+  "upload-image": "Téléverse une image pour ta vignette"
 }
