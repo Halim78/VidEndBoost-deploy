@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import CustomSwitch from "./CustomSwitch";
+import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
 import Slider from "./Slider";
+import { ImageUp } from "lucide-react";
 import CustomButton from "./CustomButton";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import html2canvas from "html2canvas";
@@ -22,8 +24,6 @@ import LinearProgressBar from "./LinearProgressBar";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import AccordionParameters from "./AccordionParameters";
-import UploadImage from "./UploadImage";
-import useStore from "../store";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -35,8 +35,6 @@ const HomeNew = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [isToastActive, setIsToastActive] = useState(false);
-
-  const { imagePath, setImagePath } = useStore();
 
   //Toast notification
   const notify = (label: string) => {
@@ -111,7 +109,7 @@ const HomeNew = () => {
 
       handleNewSwitchChange(
         "videoImage",
-        finalData.snippet.thumbnails.maxres.url
+        finalData.snippet.thumbnails.high.url
       );
       handleNewSwitchChange(
         "channelImage",
@@ -179,6 +177,7 @@ const HomeNew = () => {
           link.click();
           document.body.removeChild(link);
           imgElement.src = switchesSlidersState.videoImage;
+
           notify("🦄 Téléchargement réussi");
         })
         .catch((err) => {
@@ -283,6 +282,52 @@ const HomeNew = () => {
     videoImage: "https://i.ytimg.com/vi/f7_CHu0ADhM/maxresdefault.jpg",
     showTitle: true,
   };
+
+  //Composant upload image
+  const UploadImage = () => {
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      console.log(selectedImage);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result) {
+          setSelectedImage(reader.result as string);
+          const shortFileName = uuidv4();
+          console.log("-----", shortFileName);
+          handleNewSwitchChange("videoImage", reader.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    };
+
+    const triggerFileInput = () => {
+      fileInputRef.current?.click();
+    };
+
+    return (
+      <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          ref={fileInputRef}
+          className="hidden"
+        />
+        <div
+          onClick={triggerFileInput}
+          className="flex p-1 rounded-lg cursor-pointer"
+        >
+          <span className="pr-5 tracking-wider">{t("upload-image")}</span>
+          <ImageUp color={"#e580d8"} size={"35"} />
+        </div>
+      </div>
+    );
+  };
+
   const loadSettings = () => {
     const savedSettings = localStorage.getItem("userSettings");
     const settingsFromStorage = savedSettings ? JSON.parse(savedSettings) : {};
@@ -330,8 +375,7 @@ const HomeNew = () => {
 
   useEffect(() => {
     setYoutubeUrl(switchesSlidersState.youtubeVideoPath);
-    setImagePath(switchesSlidersState.youtubeVideoPath);
-  }, [switchesSlidersState.youtubeVideoPath, setImagePath]);
+  }, [switchesSlidersState.youtubeVideoPath]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams();
@@ -610,12 +654,9 @@ const HomeNew = () => {
                   className="w-full"
                   style={{
                     borderRadius: `${switchesSlidersState.borderRadius}px`,
+                    maxHeight: "336px",
+                    // minWidth: "448px",
                   }}
-                  // src={
-                  //   imagePath !== ""
-                  //     ? imagePath.toString
-                  //     : switchesSlidersState.videoImage
-                  // }
                   src={switchesSlidersState.videoImage}
                   alt="Image de la vidéo YouTube"
                 />
