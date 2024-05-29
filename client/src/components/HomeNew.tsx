@@ -149,7 +149,7 @@ const HomeNew = () => {
 
   const divRef = useRef(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const [processedImage, setProcessedImage] = useState<string | null>(null);
+  // const [processedImage, setProcessedImage] = useState<string | null>(null);
 
   //*** Télécharger la card ***
   const handleDownload = () => {
@@ -699,9 +699,10 @@ const HomeNew = () => {
                     maxWidth: "448px",
                   }}
                   src={
-                    processedImage
-                      ? processedImage
-                      : switchesSlidersState.videoImage
+                    // processedImage
+                    //   ? processedImage
+                    //   :
+                    switchesSlidersState.videoImage
                   }
                   alt="Image de la vidéo YouTube"
                 />
