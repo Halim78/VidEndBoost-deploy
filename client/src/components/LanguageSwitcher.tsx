@@ -3,12 +3,12 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 const LanguageSwitcher = () => {
   const { language, changeLanguage } = useLanguage();
-  const [isChecked, setIsChecked] = useState(language === "fr");
+  const [isChecked, setIsChecked] = useState(language === "en");
 
   const handleCheckboxChange = () => {
     setIsChecked((prevChecked: boolean) => {
       const newChecked = !prevChecked;
-      const newLanguage = newChecked ? "fr" : "en";
+      const newLanguage = newChecked ? "en " : "fr";
       changeLanguage(newLanguage);
       return newChecked;
     });

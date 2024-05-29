@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import CustomSwitch from "./CustomSwitch";
-import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
 import Slider from "./Slider";
 import { ImageUp } from "lucide-react";
@@ -11,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import telechargerIcon from "/src/assets/telecharger.png";
 import copierIcon from "/src/assets/copie.png";
+// import axios from "axios";
 import {
   formatISODurationToMinutesAndSeconds,
   getTimeAgo,
@@ -24,6 +24,7 @@ import LinearProgressBar from "./LinearProgressBar";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import AccordionParameters from "./AccordionParameters";
+// import RemoveBg from "./RemoveBg.jsx";
 
 const HomeNew = () => {
   const YOUTUBE_APIKEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -76,6 +77,7 @@ const HomeNew = () => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
+        notify("⚠️ Network response was not ok");
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
@@ -147,8 +149,9 @@ const HomeNew = () => {
 
   const divRef = useRef(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const [processedImage, setProcessedImage] = useState<string | null>(null);
 
-  //Télécharger la card
+  //*** Télécharger la card ***
   const handleDownload = () => {
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
@@ -160,6 +163,8 @@ const HomeNew = () => {
 
     const divElement = divRef.current;
     const imgElement = imgRef.current;
+
+    notify("⌛ Téléchargement en cours");
 
     // Attendre un peu pour que l'image soit rechargée via le proxy
     setTimeout(() => {
@@ -186,7 +191,7 @@ const HomeNew = () => {
     }, 800); // Délai pour le rechargement de l'image
   };
 
-  //Copier la card dans le press papier
+  //*** Copier la card dans le press papier ***
   const handleCopyToClipboard = () => {
     if (!divRef.current || !imgRef.current) {
       console.error("Références à la div ou à l'image manquantes");
@@ -254,7 +259,7 @@ const HomeNew = () => {
     };
   }, []);
 
-  //GESTION DU LOCALSTORAGE
+  //*** GESTION DU LOCALSTORAGE ***
   const defaultSwitchesSlidersState = {
     duration: false,
     lectureBar: false,
@@ -283,25 +288,22 @@ const HomeNew = () => {
     showTitle: true,
   };
 
-  //Composant upload image
+  //***COMPOSANT UPLOAD IMAGE***
   const UploadImage = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (!file) return;
-      console.log(selectedImage);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setSelectedImage(reader.result as string);
-          const shortFileName = uuidv4();
-          console.log("-----", shortFileName);
-          handleNewSwitchChange("videoImage", reader.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+
+      // Renommer le fichier
+      const newFile = new File([file], "renamed_image.png", {
+        type: file.type,
+      });
+
+      // Créer un URL pour le Blob et passer cette URL au parent
+      const imageUrl = URL.createObjectURL(newFile);
+      handleNewSwitchChange("videoImage", imageUrl);
     };
 
     const triggerFileInput = () => {
@@ -321,12 +323,50 @@ const HomeNew = () => {
           onClick={triggerFileInput}
           className="flex p-1 rounded-lg cursor-pointer"
         >
-          <span className="pr-5 tracking-wider">{t("upload-image")}</span>
+          <span className="pr-5 tracking-wider">Upload Image</span>
           <ImageUp color={"#e580d8"} size={"35"} />
         </div>
       </div>
     );
   };
+
+  //*** REQUETE REMOVE.BG ***
+  // const handleRemoveBackground = async () => {
+  //   if (!imgRef.current) return;
+
+  //   const REMOVEBG_APIKEY = import.meta.env.VITE_REMOVEBG_API_KEY;
+  //   const imageElement = imgRef.current;
+
+  //   try {
+  //     const response = await fetch(
+  //       `https://vid-end-boost-deploy-server.vercel.app/image-proxy?url=${encodeURIComponent(
+  //         imageElement.src
+  //       )}`
+  //     );
+  //     const blob = await response.blob();
+  //     const formData = new FormData();
+  //     formData.append("image_file", blob, "image.png");
+
+  //     const removeBgResponse = await axios.post(
+  //       "https://api.remove.bg/v1.0/removebg",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "X-Api-Key": REMOVEBG_APIKEY,
+  //         },
+  //         responseType: "blob",
+  //       }
+  //     );
+
+  //     const imageBlob = removeBgResponse.data;
+  //     const imageObjectURL = URL.createObjectURL(imageBlob);
+  //     setProcessedImage(imageObjectURL);
+  //     handleNewSwitchChange("videoImage", imageObjectURL);
+  //   } catch (error) {
+  //     notify("⚠️ Erreur lors de la suppression de l'arrière-plan");
+  //     console.error("Erreur lors de la suppression de l'arrière-plan:", error);
+  //   }
+  // };
 
   const loadSettings = () => {
     const savedSettings = localStorage.getItem("userSettings");
@@ -575,6 +615,7 @@ const HomeNew = () => {
                 </div>
               </AccordionParameters>
               <UploadImage />
+              {/* <RemoveBg handleRemoveBackground={handleRemoveBackground} /> */}
             </div>
           </div>
           <div className="flex flex-col w-1/3 mt-16 max-md:w-2/3 max-sm:flex-row max-sm:justify-center">
@@ -655,9 +696,13 @@ const HomeNew = () => {
                   style={{
                     borderRadius: `${switchesSlidersState.borderRadius}px`,
                     maxHeight: "336px",
-                    // minWidth: "448px",
+                    maxWidth: "448px",
                   }}
-                  src={switchesSlidersState.videoImage}
+                  src={
+                    processedImage
+                      ? processedImage
+                      : switchesSlidersState.videoImage
+                  }
                   alt="Image de la vidéo YouTube"
                 />
                 {switchesSlidersState.showTitle && (
