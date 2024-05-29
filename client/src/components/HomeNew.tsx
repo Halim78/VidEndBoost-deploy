@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CustomSwitch from "./CustomSwitch";
 import Header from "./Header";
 import Slider from "./Slider";
-// import { ImageUp } from "lucide-react";
+import { ImageUp } from "lucide-react";
 import CustomButton from "./CustomButton";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import html2canvas from "html2canvas";
@@ -108,6 +108,7 @@ const HomeNew = () => {
       const data = await response.json();
       const finalData = data.items[0];
       setIsLoading(false);
+      setIsBlob(false);
 
       handleNewSwitchChange(
         "videoImage",
@@ -149,7 +150,7 @@ const HomeNew = () => {
 
   const divRef = useRef(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  // const [processedImage, setProcessedImage] = useState<string | null>(null);
+  const [isBlob, setIsBlob] = useState(false);
 
   //*** Télécharger la card ***
   const handleDownload = () => {
@@ -182,8 +183,6 @@ const HomeNew = () => {
           link.click();
           document.body.removeChild(link);
           imgElement.src = switchesSlidersState.videoImage;
-
-          notify("🦄 Téléchargement réussi");
         })
         .catch((err) => {
           console.error("Erreur lors de la capture de la div:", err);
@@ -197,10 +196,9 @@ const HomeNew = () => {
       console.error("Références à la div ou à l'image manquantes");
       return;
     }
-
+    notify("⌛ Copie en cours");
     const currentSrc = imgRef.current.src;
-    imgRef.current.src = transformImageUrl(currentSrc);
-
+    !isBlob ? (imgRef.current.src = transformImageUrl(currentSrc)) : null;
     const divElement = divRef.current;
     const imgElement = imgRef.current;
 
@@ -223,6 +221,7 @@ const HomeNew = () => {
                     err
                   )
                 );
+              toast.dismiss();
               notify("Copié");
             } else {
               console.error("Impossible de créer un blob à partir du canvas");
@@ -245,7 +244,7 @@ const HomeNew = () => {
         typingTimeout.current = setTimeout(() => {
           setPlaceholder("");
           charIndex.current = 0;
-        }, 1000000); // Attendre 2 secondes avant de recommencer
+        }, 1000000);
       }
     };
 
@@ -288,47 +287,48 @@ const HomeNew = () => {
     showTitle: true,
   };
 
-  //***COMPOSANT UPLOAD IMAGE***
-  // const UploadImage = () => {
-  //   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // ***COMPOSANT UPLOAD IMAGE***
+  const UploadImage = () => {
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  //   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = event.target.files?.[0];
-  //     if (!file) return;
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
 
-  //     // Renommer le fichier
-  //     const newFile = new File([file], "renamed_image.png", {
-  //       type: file.type,
-  //     });
+      // Renommer le fichier
+      const newFile = new File([file], "renamed_image.png", {
+        type: file.type,
+      });
 
-  //     // Créer un URL pour le Blob et passer cette URL au parent
-  //     const imageUrl = URL.createObjectURL(newFile);
-  //     handleNewSwitchChange("videoImage", imageUrl);
-  //   };
+      // Créer un URL pour le Blob
+      const imageUrl = URL.createObjectURL(newFile);
+      handleNewSwitchChange("videoImage", imageUrl);
+      setIsBlob(true);
+    };
 
-  //   const triggerFileInput = () => {
-  //     fileInputRef.current?.click();
-  //   };
+    const triggerFileInput = () => {
+      fileInputRef.current?.click();
+    };
 
-  //   return (
-  //     <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
-  //       <input
-  //         type="file"
-  //         accept="image/*"
-  //         onChange={handleImageUpload}
-  //         ref={fileInputRef}
-  //         className="hidden"
-  //       />
-  //       <div
-  //         onClick={triggerFileInput}
-  //         className="flex p-1 rounded-lg cursor-pointer"
-  //       >
-  //         <span className="pr-5 tracking-wider">Upload Image</span>
-  //         <ImageUp color={"#e580d8"} size={"35"} />
-  //       </div>
-  //     </div>
-  //   );
-  // };
+    return (
+      <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          ref={fileInputRef}
+          className="hidden"
+        />
+        <div
+          onClick={triggerFileInput}
+          className="flex p-1 rounded-lg cursor-pointer"
+        >
+          <span className="pr-5 tracking-wider">{t("upload-image")}</span>
+        </div>
+        <ImageUp color={"#e580d8"} size={"35"} />
+      </div>
+    );
+  };
 
   //*** REQUETE REMOVE.BG ***
   // const handleRemoveBackground = async () => {
@@ -614,7 +614,7 @@ const HomeNew = () => {
                   />
                 </div>
               </AccordionParameters>
-              {/* <UploadImage /> */}
+              <UploadImage />
               {/* <RemoveBg handleRemoveBackground={handleRemoveBackground} /> */}
             </div>
           </div>

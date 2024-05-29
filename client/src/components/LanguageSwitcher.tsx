@@ -3,12 +3,12 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 const LanguageSwitcher = () => {
   const { language, changeLanguage } = useLanguage();
-  const [isChecked, setIsChecked] = useState(language === "en");
+  const [isChecked, setIsChecked] = useState(language === "fr");
 
   const handleCheckboxChange = () => {
     setIsChecked((prevChecked: boolean) => {
       const newChecked = !prevChecked;
-      const newLanguage = newChecked ? "en " : "fr";
+      const newLanguage = newChecked ? "en" : "fr";
       changeLanguage(newLanguage);
       return newChecked;
     });
@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
         />
         <span
           className={`flex items-center space-x-[2px] rounded py-0 px-[8px] text-sm font-medium ${
-            isChecked
+            !isChecked
               ? "text-primary bg-[#010101] dark:bg-white"
               : "text-body-color"
           }`}
@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
         </span>
         <span
           className={`flex items-center space-x-[2px] rounded py-0 px-[8px] text-sm font-medium ${
-            !isChecked
+            isChecked
               ? "text-primary bg-[#010101] dark:bg-white"
               : "text-body-color"
           }`}
