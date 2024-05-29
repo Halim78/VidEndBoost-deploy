@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CustomSwitch from "./CustomSwitch";
 import Header from "./Header";
 import Slider from "./Slider";
-import { ImageUp } from "lucide-react";
+// import { ImageUp } from "lucide-react";
 import CustomButton from "./CustomButton";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import html2canvas from "html2canvas";
@@ -289,46 +289,46 @@ const HomeNew = () => {
   };
 
   //***COMPOSANT UPLOAD IMAGE***
-  const UploadImage = () => {
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const UploadImage = () => {
+  //   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (!file) return;
+  //   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //     const file = event.target.files?.[0];
+  //     if (!file) return;
 
-      // Renommer le fichier
-      const newFile = new File([file], "renamed_image.png", {
-        type: file.type,
-      });
+  //     // Renommer le fichier
+  //     const newFile = new File([file], "renamed_image.png", {
+  //       type: file.type,
+  //     });
 
-      // Créer un URL pour le Blob et passer cette URL au parent
-      const imageUrl = URL.createObjectURL(newFile);
-      handleNewSwitchChange("videoImage", imageUrl);
-    };
+  //     // Créer un URL pour le Blob et passer cette URL au parent
+  //     const imageUrl = URL.createObjectURL(newFile);
+  //     handleNewSwitchChange("videoImage", imageUrl);
+  //   };
 
-    const triggerFileInput = () => {
-      fileInputRef.current?.click();
-    };
+  //   const triggerFileInput = () => {
+  //     fileInputRef.current?.click();
+  //   };
 
-    return (
-      <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          ref={fileInputRef}
-          className="hidden"
-        />
-        <div
-          onClick={triggerFileInput}
-          className="flex p-1 rounded-lg cursor-pointer"
-        >
-          <span className="pr-5 tracking-wider">Upload Image</span>
-          <ImageUp color={"#e580d8"} size={"35"} />
-        </div>
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
+  //       <input
+  //         type="file"
+  //         accept="image/*"
+  //         onChange={handleImageUpload}
+  //         ref={fileInputRef}
+  //         className="hidden"
+  //       />
+  //       <div
+  //         onClick={triggerFileInput}
+  //         className="flex p-1 rounded-lg cursor-pointer"
+  //       >
+  //         <span className="pr-5 tracking-wider">Upload Image</span>
+  //         <ImageUp color={"#e580d8"} size={"35"} />
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   //*** REQUETE REMOVE.BG ***
   // const handleRemoveBackground = async () => {
@@ -614,7 +614,7 @@ const HomeNew = () => {
                   />
                 </div>
               </AccordionParameters>
-              <UploadImage />
+              {/* <UploadImage /> */}
               {/* <RemoveBg handleRemoveBackground={handleRemoveBackground} /> */}
             </div>
           </div>
