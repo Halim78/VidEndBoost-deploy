@@ -24,6 +24,7 @@ import LinearProgressBar from "./LinearProgressBar";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import AccordionParameters from "./AccordionParameters";
+import ShineBorder from "./magicui/shine-border";
 // import RemoveBg from "./RemoveBg.jsx";
 
 const HomeNew = () => {
@@ -311,7 +312,10 @@ const HomeNew = () => {
     };
 
     return (
-      <div className="flex justify-between p-3 bg-gray-200 rounded-lg h-14">
+      <div
+        onClick={triggerFileInput}
+        className="flex justify-between p-3 bg-gray-200 rounded-lg cursor-pointer h-14"
+      >
         <input
           type="file"
           accept="image/*"
@@ -319,10 +323,7 @@ const HomeNew = () => {
           ref={fileInputRef}
           className="hidden"
         />
-        <div
-          onClick={triggerFileInput}
-          className="flex p-1 rounded-lg cursor-pointer"
-        >
+        <div className="flex p-1 rounded-lg cursor-pointer">
           <span className="pr-5 tracking-wider">{t("upload-image")}</span>
         </div>
         <ImageUp color={"#e580d8"} size={"35"} />
@@ -441,7 +442,7 @@ const HomeNew = () => {
   return (
     <div>
       <Header />
-      <div className="mt-0 mb-2 max-lg:mt-10 ">
+      <div className="mt-20 mb-2 max-lg:mt-10">
         <h1 className="text-5xl leading-normal tracking-wider text-white max-md:mt-16 max-md:text-3xl ">
           <span className="text-black dark:text-white">{t("title")}</span>
           <br />
@@ -457,28 +458,76 @@ const HomeNew = () => {
           </span>
         </h1>
       </div>
-      <div className="flex justify-center mt-10 max-md:mt-14">
-        <div className="flex items-end max-sm:items-center max-md:flex-col">
-          <label className="block pr-2 text-xl tracking-wider text-black max-sm:pr-0 dark:text-white ">
-            {t("input-label")}
-            <span className="text-2xl font-bold text-red-500 opacity-90">
-              YouTube
-            </span>
-          </label>
-          <div>
-            <input
-              id="typing-input"
-              type="text"
-              value={switchesSlidersState.youtubeVideoPath}
-              onChange={(e) => {
-                handleChange(e.target.value);
-                handleNewSwitchChange("youtubeVideoPath", e.target.value);
-              }}
-              className="max-w-md px-3 py-1 text-base font-normal border-2 rounded-md max-md:py-0 w-96 focus:outline-none focus:border-purple-500"
-              placeholder={placeholder}
-            />
-            {isLoading && <LinearProgressBar />}
+      <span className="mt-6 font-normal tracking-wider text-gray-300">
+        Boostez vos vues avec des miniatures YouTube personnalisées et
+        attractives.
+        <br /> VidEndBoost, votre outil gratuit pour des miniatures YouTube
+        professionnelles en quelques clics.
+      </span>
+
+      <div className="flex justify-center mt-16 max-md:mt-14">
+        <ShineBorder color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
+          <div className="flex items-end max-sm:items-center max-md:flex-col">
+            <label className="block pr-2 mr-6 text-xl tracking-wider text-black max-sm:pr-0 dark:text-white">
+              {t("input-label")}
+              <span className="ml-2 text-2xl font-bold text-red-500 opacity-90">
+                YouTube
+              </span>
+            </label>
+            <div>
+              <input
+                id="typing-input"
+                type="text"
+                value={switchesSlidersState.youtubeVideoPath}
+                onChange={(e) => {
+                  handleChange(e.target.value);
+                  handleNewSwitchChange("youtubeVideoPath", e.target.value);
+                }}
+                className="max-w-md px-3 py-1 text-base font-normal text-black border-2 rounded-md max-md:py-0 w-96 focus:outline-none focus:border-purple-500"
+                placeholder={placeholder}
+              />
+              {isLoading && <LinearProgressBar />}
+            </div>
           </div>
+        </ShineBorder>
+      </div>
+      <div className="flex mt-20">
+        <div className="w-1/2 p-6 text-left">
+          <h3 className="mb-2 text-xl tracking-wider">
+            Qu’est-ce qu’une <span>miniature YouTube</span> ?
+          </h3>
+          <p className="tracking-wider">
+            Les miniatures <span className="text-red-500">YouTube</span> sont
+            ces aperçus visuels accrocheurs qui représentent vos vidéos.
+            <p>
+              Que vous les appeliez <span>image YouTube</span>,{" "}
+              <span>vignette</span>, <span>icône</span> ou{" "}
+              <span>YouTube thumbnail</span>, leur objectif reste le même :
+              capter l'attention et inciter les spectateurs à cliquer.
+            </p>
+          </p>
+          <p>
+            Imaginez les miniatures comme des couvertures de livres. Elles
+            offrent un aperçu captivant de votre vidéo, pour booster les vues.
+          </p>
+        </div>
+        <div className="w-1/2 p-6 text-right">
+          <h3 className="mb-2 text-xl tracking-wider">
+            Pourquoi les miniatures YouTube sont-elles importantes ?
+          </h3>
+          <p className="tracking-wider">
+            La qualité de vos vignettes influence grandement le succès de vos
+            vidéos. Une miniature YouTube attrayante peut générer des milliers
+            de vues, tandis qu’une mauvaise vignette peut nuire à votre chaîne.
+          </p>
+          <p className="tracking-wider">
+            Heureusement, YouTube permet de personnaliser vos miniatures. Lors
+            du téléchargement d'une vidéo, la plateforme sélectionne
+            automatiquement trois images de votre contenu pour les utiliser
+            comme vignettes. Cependant, il est fortement recommandé de créer vos
+            propres miniatures personnalisées pour un impact maximal comme avec{" "}
+            <span>VidEndBoost</span>.
+          </p>
         </div>
       </div>
       <div className="absolute flex w-full mt-4 max-lg:flex-col h-2/3 max-lg:mt-16">
@@ -487,9 +536,9 @@ const HomeNew = () => {
           <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
           <div>
             <div className="flex justify-between">
-              <h2 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
+              <h3 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
                 {t("parameters-title")}
-              </h2>
+              </h3>
               <div className="block sm:hidden">
                 <LanguageSwitcher />
               </div>
