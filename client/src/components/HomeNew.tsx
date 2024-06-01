@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import CustomSwitch from "./CustomSwitch";
-import Header from "./Header";
 import Slider from "./Slider";
 import { ImageUp } from "lucide-react";
 import CustomButton from "./CustomButton";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import html2canvas from "html2canvas";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import telechargerIcon from "/src/assets/telecharger.png";
 import copierIcon from "/src/assets/copie.png";
@@ -25,6 +23,10 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import AccordionParameters from "./AccordionParameters";
 import ShineBorder from "./magicui/shine-border";
+import DotPattern from "./magicui/dot-pattern";
+import { cn } from "../Utils/lib";
+import { toast, ToastContainer } from "react-toastify";
+import { InfiniteCard } from "./InfiniteCard";
 // import RemoveBg from "./RemoveBg.jsx";
 
 const HomeNew = () => {
@@ -440,10 +442,9 @@ const HomeNew = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <Header />
+    <div className="relative">
       <div className="mt-20 mb-2 max-lg:mt-10">
-        <h1 className="text-5xl leading-normal tracking-wider text-white max-md:mt-16 max-md:text-3xl ">
+        <h1 className="text-5xl leading-normal tracking-wider text-white max-md:mt-16 max-md:text-3xl max-md:mx-10 mx-md:mb-6">
           <span className="text-black dark:text-white">{t("title")}</span>
           <br />
           <span className="text-black dark:text-white">
@@ -458,17 +459,15 @@ const HomeNew = () => {
           </span>
         </h1>
       </div>
-      <span className="mt-6 font-normal tracking-wider text-gray-300">
-        Boostez vos vues avec des miniatures YouTube personnalisées et
-        attractives.
-        <br /> VidEndBoost, votre outil gratuit pour des miniatures YouTube
-        professionnelles en quelques clics.
-      </span>
-
-      <div className="flex justify-center mt-16 max-md:mt-14">
+      <h2 className="mt-6 font-normal tracking-wider text-gray-300">
+        {t("subtitle")}
+        <br /> {t("subtitle-second-ligne")}
+      </h2>
+      {/*INPUT YT VIDEO*/}
+      <div className="flex justify-center mt-20 max-md:mt-14 max-md:mx-2">
         <ShineBorder color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
-          <div className="flex items-end max-sm:items-center max-md:flex-col">
-            <label className="block pr-2 mr-6 text-xl tracking-wider text-black max-sm:pr-0 dark:text-white">
+          <div className="flex items-end max-sm:items-center max-md:flex-col ">
+            <label className="block pr-2 mr-6 text-xl tracking-wider text-black max-sm:pr-0 dark:text-white max-md:pb-2">
               {t("input-label")}
               <span className="ml-2 text-2xl font-bold text-red-500 opacity-90">
                 YouTube
@@ -491,49 +490,19 @@ const HomeNew = () => {
           </div>
         </ShineBorder>
       </div>
-      <div className="flex mt-20">
-        <div className="w-1/2 p-6 text-left">
-          <h3 className="mb-2 text-xl tracking-wider">
-            Qu’est-ce qu’une <span>miniature YouTube</span> ?
-          </h3>
-          <p className="tracking-wider">
-            Les miniatures <span className="text-red-500">YouTube</span> sont
-            ces aperçus visuels accrocheurs qui représentent vos vidéos.
-            <p>
-              Que vous les appeliez <span>image YouTube</span>,{" "}
-              <span>vignette</span>, <span>icône</span> ou{" "}
-              <span>YouTube thumbnail</span>, leur objectif reste le même :
-              capter l'attention et inciter les spectateurs à cliquer.
-            </p>
-          </p>
-          <p>
-            Imaginez les miniatures comme des couvertures de livres. Elles
-            offrent un aperçu captivant de votre vidéo, pour booster les vues.
-          </p>
-        </div>
-        <div className="w-1/2 p-6 text-right">
-          <h3 className="mb-2 text-xl tracking-wider">
-            Pourquoi les miniatures YouTube sont-elles importantes ?
-          </h3>
-          <p className="tracking-wider">
-            La qualité de vos vignettes influence grandement le succès de vos
-            vidéos. Une miniature YouTube attrayante peut générer des milliers
-            de vues, tandis qu’une mauvaise vignette peut nuire à votre chaîne.
-          </p>
-          <p className="tracking-wider">
-            Heureusement, YouTube permet de personnaliser vos miniatures. Lors
-            du téléchargement d'une vidéo, la plateforme sélectionne
-            automatiquement trois images de votre contenu pour les utiliser
-            comme vignettes. Cependant, il est fortement recommandé de créer vos
-            propres miniatures personnalisées pour un impact maximal comme avec{" "}
-            <span>VidEndBoost</span>.
-          </p>
-        </div>
-      </div>
-      <div className="absolute flex w-full mt-4 max-lg:flex-col h-2/3 max-lg:mt-16">
+      {/*BODY */}
+      <div className="relative flex w-full mt-28 max-lg:flex-col h-2/3 max-lg:mt-16">
         {/*Bloc Gauche */}
-        <div className="flex items-center justify-around w-1/2 pt-1 max-lg:w-auto max-md:flex-col ">
-          <div className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"></div>
+        <div className="flex items-start justify-around w-1/2 pt-1 max-lg:w-auto max-md:flex-col max-lg:items-center">
+          <div
+          // className="absolute pointer-events-none h-full w-2/5 bg-[linear-gradient(to_right,#b1b1b12e_1px,transparent_1px),linear-gradient(to_bottom,#b1b1b12e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_10%,transparent_100%)]"
+          ></div>
+          <DotPattern
+            height={"20px"}
+            className={cn(
+              "[mask-image:radial-gradient(200px_circle_at_center,white,transparent)] absolute  h-full w-3/5"
+            )}
+          />
           <div>
             <div className="flex justify-between">
               <h3 className="pb-4 text-3xl font-medium tracking-wider text-left text-black max-md:text-xl dark:text-white">
@@ -703,9 +672,9 @@ const HomeNew = () => {
           style={{
             borderTopWidth: "2px",
             borderBottomWidth: "2px",
-            marginTop: `${
-              switchesSlidersState.modelSelectedIndex === 0 ? "60px" : "145px"
-            }`,
+            // marginTop: `${
+            //   switchesSlidersState.modelSelectedIndex === 0 ? "60px" : "145px"
+            // }`,
             marginBottom: `${
               switchesSlidersState.modelSelectedIndex === 0 ? "75px" : "170px"
             }`,
@@ -878,6 +847,11 @@ const HomeNew = () => {
           </div>
         </div>
       </div>
+      {/*A gérer ici le souci du botoom border*/}
+      <div className="h-[20rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+        <InfiniteCard items={testimonials} direction="right" speed="slow" />
+      </div>
+      <div className="h-12"></div>
       <ToastContainer />
       <span className="absolute text-gray-300 max-lg:hidden bottom-3 right-6">
         V.1
@@ -887,3 +861,35 @@ const HomeNew = () => {
 };
 
 export default HomeNew;
+
+const testimonials = [
+  {
+    quote:
+      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
+    name: "Charles Dickens",
+    title: "A Tale of Two Cities",
+  },
+  {
+    quote:
+      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
+    name: "William Shakespeare",
+    title: "Hamlet",
+  },
+  {
+    quote: "All that we see or seem is but a dream within a dream.",
+    name: "Edgar Allan Poe",
+    title: "A Dream Within a Dream",
+  },
+  {
+    quote:
+      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
+    name: "Jane Austen",
+    title: "Pride and Prejudice",
+  },
+  {
+    quote:
+      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
+    name: "Herman Melville",
+    title: "Moby-Dick",
+  },
+];

@@ -1,11 +1,11 @@
-import HomeNew from "./components/HomeNew";
+import Home from "./components/Home";
 import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
-    <div>
+    <div className="flex flex-col">
       <Analytics />
-      <HomeNew />
+      <Home />
     </div>
   );
 }

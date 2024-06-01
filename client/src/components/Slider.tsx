@@ -16,10 +16,10 @@ const Slider: React.FC<CustomSliderProps> = ({
   return (
     <div className="relative ">
       <div className="flex items-center justify-between py-1.5">
-        <div className="flex flex-col max-md:flex-row justify-between w-full">
+        <div className="flex flex-col justify-between w-full max-md:flex-row">
           <label
             htmlFor="default-range"
-            className="w-full font-medium tracking-wider text-left text-black text-md dark:text-gray-300"
+            className="w-full font-medium tracking-wider text-left text-black text-md "
           >
             {label}
           </label>
@@ -36,7 +36,7 @@ const Slider: React.FC<CustomSliderProps> = ({
         </div>
         <output
           htmlFor="default-range"
-          className="w-2/6 ml-3 font-medium text-gray-300 font-roboto text-md dark:text-gray-300"
+          className="w-2/6 ml-3 font-bold text-gray-600 font-roboto text-md "
         >
           {Math.round(parseInt(value))}{" "}
           {label === "Progression lecture bar" ? "%" : "px"}

@@ -12,7 +12,7 @@ const CustomSwitch: React.FC<CustomSwitchProps> = ({
   return (
     <div>
       <label className="inline-flex items-center w-full mb-3 cursor-pointer">
-        <span className="p-2 font-medium tracking-wider text-gray-900 text-md dark:text-gray-300">
+        <span className="p-2 font-medium tracking-wider text-gray-900 text-md ">
           {title}
         </span>
         <input
