@@ -854,7 +854,7 @@ const HomeNew = () => {
       <div className="h-12"></div>
       <ToastContainer />
       <span className="absolute text-gray-300 max-lg:hidden bottom-3 right-6">
-        V.1
+        V.1.5
       </span>
     </div>
   );

@@ -10,14 +10,14 @@ type AccordionProps = {
 
 const AccordionParameters: React.FC<AccordionProps> = ({ title, children }) => {
   return (
-    <div style={{ boxShadow: "#e2dcdc 0px 0px 20px 0px", borderRadius: "5px" }}>
+    <div>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          {title}
+          <span>{title}</span>
         </AccordionSummary>
         <AccordionDetails>{children}</AccordionDetails>
       </Accordion>
