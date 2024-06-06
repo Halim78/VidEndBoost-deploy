@@ -864,32 +864,42 @@ export default HomeNew;
 
 const testimonials = [
   {
+    question: "Qu’est ce qu’une miniature YouTube ?",
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "Les miniatures YouTube sont ces petits aperçus visuels utilisés pour représenter les vidéos YouTube. On parle parfois d’image YouTube, de vignette YouTube, d’icône YouTube ou encore de YouTube thumbnail. Quel que soit le nom qu’on lui donne, une miniature YouTube vise à attirer l’attention des gens et à les inciter à regarder une vidéo. Pensez aux vignettes YouTube comme à des couvertures de livres. Il s’agit d’une mini représentation du contenu de votre vidéo, une sorte de bande-annonce fixe.",
   },
   {
+    question: "Pourquoi les miniatures YouTube sont-elles importantes ?",
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
+      "Heureusement, YouTube vous permet de customiser vos miniatures et de publier des miniatures personnalisées. Lorsque vous téléchargez une vidéo, la plateforme prend automatiquement trois images de votre vidéo pour les utiliser comme vignettes. Mais il est préférable de créer les vôtres avec des outils comme VidEndBoost.",
   },
   {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
+    question: "Pourquoi une bonne vignette est essentielle ?",
+    quote:
+      "Une vignette YouTube efficace n'est pas seulement une image ; c'est un aperçu de votre vidéo, une promesse visuelle qui attire l'attention et suscite la curiosité. Elle doit refléter le contenu de votre vidéo tout en étant suffisamment intrigante pour encourager les clics.",
   },
   {
+    question: "Créez des miniatures YouTube remarquables qui boost vos vues",
     quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
+      "Après avoir investi du temps et des efforts pour filmer et monter une vidéo exceptionnelle, vous souhaitez la présenter sous son meilleur jour. La vignette de votre vidéo est la première chose que votre audience verra, et elle doit refléter la qualité de votre contenu. Imaginez encapsuler l'essence de votre vidéo en une seule image accrocheuse qui incite les spectateurs à cliquer et à regarder. C'est exactement ce que vous pouvez réaliser avec Videndboost. Nos outils intuitifs vous permettent de concevoir des miniatures professionnelles qui captivent instantanément l'attention.",
   },
   {
+    question: "Attirez l'attention avec des miniatures YouTube irrésistibles",
     quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "Faire en sorte que votre public ne puisse pas résister à cliquer sur votre vignette YouTube est essentiel pour augmenter vos vues. Avec Videndboost, créer une miniature YouTube captivante devient un jeu d'enfant. Essayez-le maintenant et voyez la différence !",
+  },
+  {
+    question: "Comment Obtenir plus de Vues sur YouTube ?",
+    quote:
+      "Obtenir plus de vues sur YouTube est essentiel pour faire croître votre chaîne et atteindre un public plus large. Voici quelques stratégies efficaces pour augmenter vos vues de manière authentique : Créez du Contenu de Qualité,  Optimisez vos Titres et Descriptions et Utilisez des Miniatures Accrocheuses",
+  },
+  {
+    question: "5 astuces pour booster vos vues Youtube",
+    quote: `Utiliser des mots clés pertinents dans le titre et la description de vos vidéos, Optimiser les miniatures de vos vidéos pour augmenter l’engagement des spectateurs, Partager vos vidéos sur les réseaux sociaux et les forums, Collaborer avec d’autres créateurs de contenu pour atteindre de nouveaux publics et Analyser les statistiques de vos impressions YouTube pour optimiser votre stratégie de contenu`,
+  },
+  {
+    question: "Comment Videndboost peut vous aider ?",
+    quote:
+      "Avec Videndboost, vous avez accès à une gamme d'outils de conception intuitifs qui vous permettent de créer des vignettes impressionnantes sans effort pour booster vos vues. Que vous soyez un débutant ou un professionnel, nos fonctionnalités vous aideront à transformer vos idées en vignettes visuellement saisissantes. Ne laissez pas vos vidéos passer inaperçues. Utilisez Videndboost pour créer des miniatures YouTube irrésistibles qui boostent vos vues et attirent plus de spectateurs vers votre contenu de qualité. Essayez Videndboost aujourd'hui et donnez à vos vidéos l'attention qu'elles méritent.",
   },
 ];
