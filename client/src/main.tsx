@@ -6,11 +6,16 @@ import {
   LanguageProvider,
   // useLanguage,
 } from "../src/contexts/LanguageContext.jsx";
+import NotFound from "./NotFound.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <LanguageProvider>
-      <App />
-    </LanguageProvider>
-  </React.StrictMode>
+  window.location.pathname !== "/" ? (
+    <NotFound />
+  ) : (
+    <React.StrictMode>
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
+    </React.StrictMode>
+  )
 );

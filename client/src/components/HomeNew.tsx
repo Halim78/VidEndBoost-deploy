@@ -482,7 +482,7 @@ const HomeNew = () => {
                   handleChange(e.target.value);
                   handleNewSwitchChange("youtubeVideoPath", e.target.value);
                 }}
-                className="max-w-md px-3 py-1 text-base font-normal text-black border-2 rounded-md max-md:py-0 w-96 focus:outline-none focus:border-purple-500"
+                className="max-w-md px-3 py-1 text-base font-normal text-black border-2 rounded-md max-md:py-0 w-96 max-sm:w-80 focus:outline-none focus:border-purple-500"
                 placeholder={placeholder}
               />
               {isLoading && <LinearProgressBar />}
