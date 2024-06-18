@@ -53,13 +53,23 @@ const HomeNew = () => {
 
   const handleChange = (value: string) => {
     console.log(youtubeUrl);
+    // Expression régulière pour capturer l'identifiant de la vidéo des URLs youtu.be
+    const regex = /https?:\/\/youtu\.be\/([a-zA-Z0-9_-]{11})/;
+
+    // Extraire l'identifiant de la vidéo
+    const match = value.match(regex);
+
     setPlaceholder(value);
     setYoutubeUrl(value);
     if (!value.startsWith("https://")) {
       notify("⚠️ Adresse Invalide");
       return null;
     }
-    const videoId: string | null = getVideoId(value);
+    let videoId: string | null = getVideoId(value);
+    if (match) {
+      videoId = match[1];
+    }
+
     if (videoId) {
       fetchYouTubeVideo(videoId);
     }
